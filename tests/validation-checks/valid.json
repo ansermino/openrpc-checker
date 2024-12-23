@@ -90,12 +90,31 @@
       "paramStructure": "by-position"
     },
     {
-      "name": "DifferentResult",
+      "name": "DifferentResultRequired",
       "description": "Returns the block with the specified CID",
       "params": [
         {
           "name": "cid",
           "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Method1.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Cid"
+        }
+      }
+    },
+    {
+      "name": "DifferentResultSchema",
+      "description": "Returns the block with the specified CID",
+      "params": [
+        {
+          "name": "cid",
           "schema": {
             "$ref": "#/components/schemas/Cid"
           }

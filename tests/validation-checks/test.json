@@ -68,7 +68,7 @@
       }
     },
     {
-      "name": "DifferentResult",
+      "name": "DifferentResultRequired",
       "description": "Returns the block with the specified CID",
       "params": [
         {
@@ -86,6 +86,25 @@
           "$ref": "#/components/schemas/Cid"
         }
       }
+    },
+    {
+      "name": "DifferentResultSchema",
+      "description": "Returns the block with the specified CID",
+      "params": [
+        {
+          "name": "cid",
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Method1.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/BadCid"
+        }
+      }
     }
   ],
   "components": {
@@ -96,6 +115,15 @@
         "properties": {
           "/": {
             "type": "string"
+          }
+        }
+      },
+      "BadCid": {
+        "type": "object",
+        "required": ["/"],
+        "properties": {
+          "/": {
+            "type": "number"
           }
         }
       }

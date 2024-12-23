@@ -6,16 +6,13 @@ import {
   ContentDescriptorOrReference,
   ContentDescriptorObject,
 } from '@open-rpc/meta-schema';
-import {
-  MethodDoesNotExistIssue,
-  DiffIssues,
-  MethodMissingParamIssue
-} from './issues';
 import {MethodChecks} from './checks/methodChecks';
 import {MethodParamChecks} from './checks/methodParamChecks';
+import {MethodResultChecks} from './checks/methodResultChecks';
+import {MethodIssue_MissingMethod, MethodParamIssue_MissingParam} from "./issues";
 
 export type DiffResults = {
-  [key: string]: DiffIssues[];
+  [key: string]: any[];
 };
 
 export type MethodMap = {
@@ -79,19 +76,18 @@ export const diff = (expected: OpenrpcDocument, actual: OpenrpcDocument): DiffRe
   return res;
 };
 
-export const methodDiff = (method: string, expected: MethodMap, actual: MethodMap): DiffIssues[] => {
+export const methodDiff = (method: string, expected: MethodMap, actual: MethodMap): any[] => {
   const expMethod = expected[method];
   const actMethod = actual[method];
 
-  const errs: DiffIssues[] = [];
+  const errs: any[] = [];
 
   if (expMethod === undefined) {
-    // TODO: This should be a more serious error
-    return [new MethodDoesNotExistIssue(method)];
+    throw new Error("Unexpected reference to method");
   }
 
   if (actMethod === undefined) {
-    return [new MethodDoesNotExistIssue(method)];
+    return [new MethodIssue_MissingMethod(method)];
   }
 
   for (const c of MethodChecks) {
@@ -103,7 +99,7 @@ export const methodDiff = (method: string, expected: MethodMap, actual: MethodMa
     const actualParam = getMethodParam(expectedParam.name, actMethod.params);
 
     if (actualParam === null) {
-      errs.push(new MethodMissingParamIssue(expectedParam.name));
+      errs.push(new MethodParamIssue_MissingParam(expectedParam.name));
       return;
     }
 
@@ -111,6 +107,10 @@ export const methodDiff = (method: string, expected: MethodMap, actual: MethodMa
       errs.push(...c(expectedParam, actualParam));
     }
   });
+
+  for (const c of MethodResultChecks) {
+    errs.push(...c(expMethod.result as ContentDescriptorObject, actMethod.result as ContentDescriptorObject));
+  }
 
   return errs;
 };

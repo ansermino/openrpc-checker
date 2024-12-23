@@ -1,7 +1,13 @@
 import {parseOpenRPCDocument} from '@open-rpc/schema-utils-js';
 import {createMethodMap, isMethod, methodDiff} from './diff';
 import {ContentDescriptorObject, MethodObject, MethodOrReference, OpenrpcDocument} from '@open-rpc/meta-schema';
-import {MethodDoesNotExistIssue, MethodMissingParamIssue, MethodParamStructureIssue, MethodResultIssue} from './issues';
+import {
+  MethodIssue_MissingMethod,
+  MethodParamIssue_MissingParam,
+  MethodIssue_ParamStructure, MethodResultIssue_Required,
+  MethodResultIssue_Schema
+} from './issues';
+import {todo} from "node:test";
 
 // Returns a MethodMap containing only the method at index i
 const createTestMethodMap = (methods: MethodOrReference[], target: string) => {
@@ -40,7 +46,7 @@ describe('compare methods', () => {
 
     const res = methodDiff(METHOD, ref, test);
 
-    const expected = [new MethodDoesNotExistIssue(METHOD)];
+    const expected = [new MethodIssue_MissingMethod(METHOD)];
 
     expect(res).toHaveLength(1);
     expect(res).toEqual(expected);
@@ -54,12 +60,16 @@ describe('compare methods', () => {
 
     const res = methodDiff(METHOD, ref, test);
 
-    const expected = [new MethodMissingParamIssue(expectedParamName)];
+    const expected = [new MethodParamIssue_MissingParam(expectedParamName)];
 
     expect(res).toHaveLength(1);
-    expect(res[0]).toBeInstanceOf(MethodMissingParamIssue);
+    expect(res[0]).toBeInstanceOf(MethodParamIssue_MissingParam);
     expect(res).toEqual(expected);
   });
+
+  it('should report an issue if a method has a different parameter schema', () => {
+    todo()
+  })
 
   it('should report an issue if a method has different param structure', () => {
     const METHOD = 'DifferentParamStructure';
@@ -72,27 +82,49 @@ describe('compare methods', () => {
 
     const res = methodDiff(methodName, ref, test);
 
-    const expected = [new MethodParamStructureIssue(expectedStructure, undefined)];
+    const expected = [new MethodIssue_ParamStructure(expectedStructure, undefined)];
 
     expect(res).toHaveLength(1);
-    expect(res[0]).toBeInstanceOf(MethodParamStructureIssue);
+    expect(res[0]).toBeInstanceOf(MethodIssue_ParamStructure);
     expect(res).toEqual(expected);
   });
 
-  it('should report an issue if the method result is different ', () => {
-    const METHOD = 'DifferentResult';
+  it('should report an issue if the method result is/not required ', () => {
+    const METHOD = 'DifferentResultRequired';
 
     const ref = createTestMethodMap(referenceDoc.methods, METHOD);
     const test = createTestMethodMap(testDoc.methods, METHOD);
-
     const methodName: string = Object.keys(ref)[0];
 
     const res = methodDiff(methodName, ref, test);
 
-    const expected = [new MethodResultIssue(ref[METHOD].result, test[METHOD].result)];
+    const expectedReq = (ref[METHOD].result as ContentDescriptorObject).required
+    const actualReq = (test[METHOD].result as ContentDescriptorObject).required
+    const expectedIssue = [new MethodResultIssue_Required(expectedReq, actualReq)];
 
     expect(res).toHaveLength(1);
-    expect(res[0]).toBeInstanceOf(MethodResultIssue);
-    expect(res).toEqual(expected);
+    expect(res[0]).toBeInstanceOf(MethodResultIssue_Required);
+    expect(res).toEqual(expectedIssue);
+  });
+
+  it('should report an issue if the method result schema is different ', () => {
+    const METHOD = 'DifferentResultSchema';
+
+    const ref = createTestMethodMap(referenceDoc.methods, METHOD);
+    const test = createTestMethodMap(testDoc.methods, METHOD);
+    const methodName: string = Object.keys(ref)[0];
+
+    const res = methodDiff(methodName, ref, test);
+
+    const expectedSchema = (ref[METHOD].result as ContentDescriptorObject).schema
+    const actualSchema = (test[METHOD].result as ContentDescriptorObject).schema
+
+    console.log(expectedSchema)
+    console.log(actualSchema)
+    const expectedIssue = [new MethodResultIssue_Schema(expectedSchema, actualSchema)];
+
+    expect(res).toHaveLength(1);
+    expect(res[0]).toBeInstanceOf(MethodResultIssue_Schema);
+    expect(res).toEqual(expectedIssue);
   });
 });
