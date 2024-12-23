@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "run": "ts-node src/index.ts"
+    "run": "ts-node src/index.ts",
+    "format": "prettier -w ."
   },
   "devDependencies": {
     "@types/jest": "^29.5.14",

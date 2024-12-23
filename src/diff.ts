@@ -8,14 +8,11 @@ import {
 } from '@open-rpc/meta-schema';
 import {
   MethodDoesNotExistErr,
-  MethodParamStructureErr,
   DiffErrors,
-  MethodMissingParam,
-  MethodRequiredError,
-  MethodSchemaError,
-  ResultError,
+  MethodMissingParam
 } from './errors';
-import {isDeepStrictEqual} from 'node:util';
+import {MethodChecks} from './checks/methodChecks';
+import {MethodParamChecks} from './checks/methodParamChecks';
 
 export type DiffResults = {
   [key: string]: DiffErrors[];
@@ -86,9 +83,10 @@ export const methodDiff = (method: string, expected: MethodMap, actual: MethodMa
   const expMethod = expected[method];
   const actMethod = actual[method];
 
-  const errs = [];
+  const errs: DiffErrors[] = [];
 
   if (expMethod === undefined) {
+    // TODO: This should be a more serious error
     return [new MethodDoesNotExistErr(method)];
   }
 
@@ -96,13 +94,12 @@ export const methodDiff = (method: string, expected: MethodMap, actual: MethodMa
     return [new MethodDoesNotExistErr(method)];
   }
 
-  if (actMethod.paramStructure != expMethod.paramStructure) {
-    errs.push(new MethodParamStructureErr(expMethod.paramStructure, actMethod.paramStructure));
+  for (const c of MethodChecks) {
+    errs.push(...c(expMethod, actMethod));
   }
 
   expMethod.params.forEach((p) => {
     const expectedParam = p as ContentDescriptorObject;
-    // Take all expected params and put them in an array
     const actualParam = getMethodParam(expectedParam.name, actMethod.params);
 
     if (actualParam === null) {
@@ -110,21 +107,10 @@ export const methodDiff = (method: string, expected: MethodMap, actual: MethodMa
       return;
     }
 
-    if (expectedParam.required != actualParam.required) {
-      errs.push(new MethodRequiredError(expectedParam.required, actualParam.required));
-    }
-
-    if (!isDeepStrictEqual(expectedParam.schema, actualParam.schema)) {
-      errs.push(new MethodSchemaError(expectedParam.schema, actualParam.schema));
+    for (const c of MethodParamChecks) {
+      errs.push(...c(expectedParam, actualParam));
     }
   });
-
-  const expResult = expMethod.result;
-  const actResult = actMethod.result;
-
-  if (!isDeepStrictEqual(expResult, actResult)) {
-    errs.push(new ResultError(expResult, actResult));
-  }
 
   return errs;
 };
