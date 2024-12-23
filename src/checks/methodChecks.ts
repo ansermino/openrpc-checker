@@ -1,14 +1,23 @@
 import {MethodObject} from '@open-rpc/meta-schema';
-import {DiffErrors, MethodParamStructureErr} from '../errors';
+import {DiffIssues, MethodParamStructureIssue, MethodResultIssue} from '../issues';
+import {isDeepStrictEqual} from "node:util";
 
-type MethodCheck = (expected: MethodObject, actual: MethodObject) => DiffErrors[];
+type MethodCheck = (expected: MethodObject, actual: MethodObject) => DiffIssues[];
 
-const methodCheckParamStructure = (expected: MethodObject, actual: MethodObject): DiffErrors[] => {
+const methodCheckParamStructure = (expected: MethodObject, actual: MethodObject): DiffIssues[] => {
   if (expected.paramStructure != actual.paramStructure) {
-    return [new MethodParamStructureErr(expected.paramStructure, actual.paramStructure)];
+    return [new MethodParamStructureIssue(expected.paramStructure, actual.paramStructure)];
   }
 
   return [];
 };
 
-export const MethodChecks: MethodCheck[] = [methodCheckParamStructure];
+const methodCheckResult = (expected: MethodObject, actual: MethodObject): DiffIssues[] => {
+  if (!isDeepStrictEqual(expected.result, actual.result)) {
+    return [new MethodResultIssue(expected.result, actual.result)];
+  }
+
+  return []
+}
+
+export const MethodChecks: MethodCheck[] = [methodCheckParamStructure, methodCheckResult];

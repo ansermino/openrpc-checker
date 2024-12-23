@@ -7,15 +7,15 @@ import {
   ContentDescriptorObject,
 } from '@open-rpc/meta-schema';
 import {
-  MethodDoesNotExistErr,
-  DiffErrors,
-  MethodMissingParam
-} from './errors';
+  MethodDoesNotExistIssue,
+  DiffIssues,
+  MethodMissingParamIssue
+} from './issues';
 import {MethodChecks} from './checks/methodChecks';
 import {MethodParamChecks} from './checks/methodParamChecks';
 
 export type DiffResults = {
-  [key: string]: DiffErrors[];
+  [key: string]: DiffIssues[];
 };
 
 export type MethodMap = {
@@ -53,7 +53,7 @@ const getMethodParam = (name: string, params: MethodObjectParams): ContentDescri
 
 // Returns a map of method name => method object
 export const createMethodMap = (methods: MethodOrReference[]): MethodMap => {
-  let map: MethodMap = {};
+  const map: MethodMap = {};
   methods.forEach((m) => {
     if (isMethod(m)) {
       map[m.name] = m;
@@ -66,8 +66,8 @@ export const createMethodMap = (methods: MethodOrReference[]): MethodMap => {
 };
 
 export const diff = (expected: OpenrpcDocument, actual: OpenrpcDocument): DiffResults => {
-  let methodsExpected: MethodMap = createMethodMap(expected.methods);
-  let methodsActual: MethodMap = createMethodMap(actual.methods);
+  const methodsExpected: MethodMap = createMethodMap(expected.methods);
+  const methodsActual: MethodMap = createMethodMap(actual.methods);
   const methodNames = expected.methods.map((m) => getMethodName(m));
 
   const res: DiffResults = {};
@@ -79,19 +79,19 @@ export const diff = (expected: OpenrpcDocument, actual: OpenrpcDocument): DiffRe
   return res;
 };
 
-export const methodDiff = (method: string, expected: MethodMap, actual: MethodMap): DiffErrors[] => {
+export const methodDiff = (method: string, expected: MethodMap, actual: MethodMap): DiffIssues[] => {
   const expMethod = expected[method];
   const actMethod = actual[method];
 
-  const errs: DiffErrors[] = [];
+  const errs: DiffIssues[] = [];
 
   if (expMethod === undefined) {
     // TODO: This should be a more serious error
-    return [new MethodDoesNotExistErr(method)];
+    return [new MethodDoesNotExistIssue(method)];
   }
 
   if (actMethod === undefined) {
-    return [new MethodDoesNotExistErr(method)];
+    return [new MethodDoesNotExistIssue(method)];
   }
 
   for (const c of MethodChecks) {
@@ -103,7 +103,7 @@ export const methodDiff = (method: string, expected: MethodMap, actual: MethodMa
     const actualParam = getMethodParam(expectedParam.name, actMethod.params);
 
     if (actualParam === null) {
-      errs.push(new MethodMissingParam(expectedParam.name));
+      errs.push(new MethodMissingParamIssue(expectedParam.name));
       return;
     }
 

@@ -1,7 +1,7 @@
 import {parseOpenRPCDocument} from '@open-rpc/schema-utils-js';
-import {createMethodMap, diff, isMethod, methodDiff, MethodMap} from './diff';
+import {createMethodMap, isMethod, methodDiff} from './diff';
 import {ContentDescriptorObject, MethodObject, MethodOrReference, OpenrpcDocument} from '@open-rpc/meta-schema';
-import {MethodDoesNotExistErr, MethodMissingParam, MethodParamStructureErr, ResultError} from './errors';
+import {MethodDoesNotExistIssue, MethodMissingParamIssue, MethodParamStructureIssue, MethodResultIssue} from './issues';
 
 // Returns a MethodMap containing only the method at index i
 const createTestMethodMap = (methods: MethodOrReference[], target: string) => {
@@ -24,75 +24,75 @@ describe('compare methods', () => {
   it('should consider two identical methods as the same', () => {
     const METHOD = 'ValidMethod';
 
-    let ref = createTestMethodMap(referenceDoc.methods, METHOD);
-    let test = createTestMethodMap(testDoc.methods, METHOD);
+    const ref = createTestMethodMap(referenceDoc.methods, METHOD);
+    const test = createTestMethodMap(testDoc.methods, METHOD);
 
     const res = methodDiff(METHOD, ref, test);
 
     expect(res).toHaveLength(0);
   });
 
-  it('should return an error if a method only exists in one document', () => {
+  it('should report an issue if a method only exists in one document', () => {
     const METHOD = 'MissingMethod';
     // Use full method map to check missing method
-    let ref = createMethodMap(referenceDoc.methods);
-    let test = createMethodMap(testDoc.methods);
+    const ref = createMethodMap(referenceDoc.methods);
+    const test = createMethodMap(testDoc.methods);
 
     const res = methodDiff(METHOD, ref, test);
 
-    const expected = [new MethodDoesNotExistErr(METHOD)];
+    const expected = [new MethodDoesNotExistIssue(METHOD)];
 
     expect(res).toHaveLength(1);
     expect(res).toEqual(expected);
   });
-  it('should return an error if a method has a different parameters', () => {
+  it('should report an issue if a method has a different parameters', () => {
     const METHOD = 'DifferentParams';
-    let ref = createTestMethodMap(referenceDoc.methods, METHOD);
-    let test = createTestMethodMap(testDoc.methods, METHOD);
+    const ref = createTestMethodMap(referenceDoc.methods, METHOD);
+    const test = createTestMethodMap(testDoc.methods, METHOD);
 
     const expectedParamName = (ref[METHOD].params[0] as ContentDescriptorObject).name;
 
     const res = methodDiff(METHOD, ref, test);
 
-    const expected = [new MethodMissingParam(expectedParamName)];
+    const expected = [new MethodMissingParamIssue(expectedParamName)];
 
     expect(res).toHaveLength(1);
-    expect(res[0]).toBeInstanceOf(MethodMissingParam);
+    expect(res[0]).toBeInstanceOf(MethodMissingParamIssue);
     expect(res).toEqual(expected);
   });
 
-  it('should return an error if a method has different param structure', () => {
+  it('should report an issue if a method has different param structure', () => {
     const METHOD = 'DifferentParamStructure';
 
-    let ref = createTestMethodMap(referenceDoc.methods, METHOD);
-    let test = createTestMethodMap(testDoc.methods, METHOD);
+    const ref = createTestMethodMap(referenceDoc.methods, METHOD);
+    const test = createTestMethodMap(testDoc.methods, METHOD);
 
     const methodName: string = Object.keys(ref)[0];
-    const expectedParamName = (ref[methodName].params[0] as ContentDescriptorObject).name;
+    const expectedStructure = (ref[methodName] as MethodObject).paramStructure
 
     const res = methodDiff(methodName, ref, test);
 
-    const expected = [new MethodParamStructureErr('by-position', undefined)];
+    const expected = [new MethodParamStructureIssue(expectedStructure, undefined)];
 
     expect(res).toHaveLength(1);
-    expect(res[0]).toBeInstanceOf(MethodParamStructureErr);
+    expect(res[0]).toBeInstanceOf(MethodParamStructureIssue);
     expect(res).toEqual(expected);
   });
 
-  it('should return an error if the result is different ', () => {
+  it('should report an issue if the method result is different ', () => {
     const METHOD = 'DifferentResult';
 
-    let ref = createTestMethodMap(referenceDoc.methods, METHOD);
-    let test = createTestMethodMap(testDoc.methods, METHOD);
+    const ref = createTestMethodMap(referenceDoc.methods, METHOD);
+    const test = createTestMethodMap(testDoc.methods, METHOD);
 
     const methodName: string = Object.keys(ref)[0];
 
     const res = methodDiff(methodName, ref, test);
 
-    const expected = [new ResultError(ref[METHOD].result, test[METHOD].result)];
+    const expected = [new MethodResultIssue(ref[METHOD].result, test[METHOD].result)];
 
     expect(res).toHaveLength(1);
-    expect(res[0]).toBeInstanceOf(ResultError);
+    expect(res[0]).toBeInstanceOf(MethodResultIssue);
     expect(res).toEqual(expected);
   });
 });
