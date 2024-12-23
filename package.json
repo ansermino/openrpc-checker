@@ -1,0 +1,23 @@
+{
+  "name": "openrpc-diff",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "run": "ts-node src/index.ts"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.4.2",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "@open-rpc/schema-utils-js": "^2.0.5",
+    "commander": "^12.1.0",
+    "console-table-printer": "^2.12.1"
+  }
+}

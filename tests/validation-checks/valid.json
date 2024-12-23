@@ -1,0 +1,129 @@
+{
+  "openrpc": "1.3.2",
+  "info": {
+    "title": "test",
+    "version": "0.0.1"
+  },
+  "methods": [
+    {
+      "name": "ValidMethod",
+      "description": "Returns the block with the specified CID",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Method1.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Cid"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "MissingMethod",
+      "description": "Returns the block with the specified CID",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Method1.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Cid"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "DifferentParams",
+      "description": "Returns the block with the specified CID",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Method1.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Cid"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "DifferentParamStructure",
+      "description": "Returns the block with the specified CID",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Method1.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Cid"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "DifferentResult",
+      "description": "Returns the block with the specified CID",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Method1.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Cid"
+        }
+      }
+    }
+
+  ],
+  "components": {
+    "schemas": {
+      "Cid": {
+        "type": "object",
+        "required": [
+          "/"
+        ],
+        "properties": {
+          "/": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
