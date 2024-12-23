@@ -109,15 +109,12 @@
         }
       }
     }
-
   ],
   "components": {
     "schemas": {
       "Cid": {
         "type": "object",
-        "required": [
-          "/"
-        ],
+        "required": ["/"],
         "properties": {
           "/": {
             "type": "string"
