@@ -1,25 +1,15 @@
-
-
 export class DiffIssue {
-    private readonly msg: string;
+  private readonly msg: string;
 
-    constructor(msg: string) {
-        this.msg = msg;
-    }
+  constructor(msg: string) {
+    this.msg = msg;
+  }
 
-    public toString(): string {
-        return `${this.msg}`;
-    }
+  public toString(): string {
+    return `${this.msg}`;
+  }
 }
 
-export * from './method'
-export * from './methodResult'
-export * from './methodParams'
-
-// export type DiffIssues =
-//     | MethodDoesNotExistIssue
-//     | MethodParamStructureIssue
-//     | MethodMissingParamIssue
-//     | MethodRequiredIssue
-//     | MethodSchemaIssue
-//     | MethodResultIssue;
+export * from './method';
+export * from './methodResult';
+export * from './methodParams';
