@@ -1,5 +1,5 @@
 export class DiffIssue {
-  private readonly msg: string;
+  private readonly msg?: string;
 
   constructor(msg: string) {
     this.msg = msg;
@@ -9,7 +9,3 @@ export class DiffIssue {
     return `${this.msg}`;
   }
 }
-
-export * from './method';
-export * from './methodResult';
-export * from './methodParams';

@@ -1,5 +1,6 @@
 import {ContentDescriptorObject} from '@open-rpc/meta-schema';
-import {DiffIssue, MethodParamIssue_Required, MethodParamIssue_Schema} from '../issues';
+import {DiffIssue} from "../issues/issue.ts";
+import {MethodParamIssue_Required, MethodParamIssue_Schema} from '../issues/methodParams.ts';
 import {isDeepStrictEqual} from 'node:util';
 
 export type MethodParamCheck = (expected: ContentDescriptorObject, actual: ContentDescriptorObject) => DiffIssue[];

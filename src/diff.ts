@@ -6,10 +6,12 @@ import {
   ContentDescriptorOrReference,
   ContentDescriptorObject,
 } from '@open-rpc/meta-schema';
-import {MethodChecks} from './checks/methodChecks';
-import {MethodParamChecks} from './checks/methodParamChecks';
-import {MethodResultChecks} from './checks/methodResultChecks';
-import {DiffIssue, MethodIssue_MissingMethod, MethodParamIssue_MissingParam} from './issues';
+import {MethodChecks} from './checks/methodChecks.ts';
+import {MethodParamChecks} from './checks/methodParamChecks.ts';
+import {MethodResultChecks} from './checks/methodResultChecks.ts';
+import {DiffIssue} from "./issues/issue.ts";
+import {MethodIssue_MissingMethod} from "./issues/method.ts";
+import {MethodParamIssue_MissingParam} from "./issues/methodParams.ts";
 
 export type DiffResults = {
   [key: string]: DiffIssue[];
