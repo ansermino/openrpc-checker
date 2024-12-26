@@ -1,6 +1,5 @@
 import {MethodObject} from '@open-rpc/meta-schema';
-import {MethodIssue_ParamStructure} from '../issues/method';
-import {DiffIssue} from '../issues/issue';
+import {DiffIssue, MethodIssue_ParamStructure} from '../issues';
 
 type MethodCheck = (expected: MethodObject, actual: MethodObject) => DiffIssue[];
 

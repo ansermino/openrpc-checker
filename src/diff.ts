@@ -9,9 +9,7 @@ import {
 import {MethodChecks} from './checks/methodChecks';
 import {MethodParamChecks} from './checks/methodParamChecks';
 import {MethodResultChecks} from './checks/methodResultChecks';
-import {DiffIssue} from './issues/issue';
-import {MethodIssue_MissingMethod} from './issues/method';
-import {MethodParamIssue_MissingParam} from './issues/methodParams';
+import {DiffIssue, MethodIssue_MissingMethod, MethodParamIssue_MissingParam} from './issues';
 
 export type DiffResults = {
   [key: string]: DiffIssue[];

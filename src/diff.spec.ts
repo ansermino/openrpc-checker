@@ -2,9 +2,13 @@ import {parseOpenRPCDocument} from '@open-rpc/schema-utils-js';
 import {createMethodMap, isMethod, methodDiff} from './diff';
 import {ContentDescriptorObject, MethodObject, MethodOrReference, OpenrpcDocument} from '@open-rpc/meta-schema';
 import {todo} from 'node:test';
-import {MethodIssue_MissingMethod, MethodIssue_ParamStructure} from './issues/method';
-import {MethodParamIssue_MissingParam} from './issues/methodParams';
-import {MethodResultIssue_Required, MethodResultIssue_Schema} from './issues/methodResult';
+import {
+  MethodIssue_MissingMethod,
+  MethodIssue_ParamStructure,
+  MethodParamIssue_MissingParam,
+  MethodResultIssue_Required,
+  MethodResultIssue_Schema,
+} from './issues';
 
 // Returns a MethodMap containing only the method at index i
 const createTestMethodMap = (methods: MethodOrReference[], target: string) => {

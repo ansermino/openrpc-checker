@@ -1,5 +1,5 @@
 import {JSONSchema} from '@open-rpc/meta-schema';
-import {DiffIssue} from './issue';
+import {DiffIssue} from './index';
 
 // Returned when a method does not have an expected parameter
 export class MethodParamIssue_MissingParam extends DiffIssue {

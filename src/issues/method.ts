@@ -1,4 +1,4 @@
-import {DiffIssue} from './issue';
+import {DiffIssue} from './index';
 import {MethodObjectParamStructure} from '@open-rpc/meta-schema';
 
 // Returned when a method with the expected name does not exist

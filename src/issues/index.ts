@@ -9,3 +9,7 @@ export class DiffIssue {
     return `${this.msg}`;
   }
 }
+
+export * from './method';
+export * from './methodParams';
+export * from './methodResult';
