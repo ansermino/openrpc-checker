@@ -8,9 +8,10 @@
     "format": "prettier -w .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "tsc && jest **/*.ts"
+    "test": "jest"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.26.0",
     "@eslint/js": "^9.17.0",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.0",
@@ -26,6 +27,7 @@
     "typescript-eslint": "^8.18.2"
   },
   "dependencies": {
+    "@open-rpc/meta-schema": "^1.14.9",
     "@open-rpc/schema-utils-js": "^2.0.5",
     "commander": "^12.1.0",
     "console-table-printer": "^2.12.1"

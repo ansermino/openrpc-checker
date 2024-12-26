@@ -1,0 +1,27 @@
+name: Lint & Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  lint-and-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: corepack enable
+      - name: Install deps
+        run: yarn --immutable
+      - name: Lint check
+        run: yarn run lint
+      - name: Format check
+        run: yarn run format
+      - name: Unit tests
+        run: yarn run test

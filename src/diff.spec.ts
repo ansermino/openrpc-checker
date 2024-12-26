@@ -1,13 +1,14 @@
 import {parseOpenRPCDocument} from '@open-rpc/schema-utils-js';
 import {createMethodMap, isMethod, methodDiff} from './diff';
 import {ContentDescriptorObject, MethodObject, MethodOrReference, OpenrpcDocument} from '@open-rpc/meta-schema';
+import {todo} from 'node:test';
 import {
   MethodIssue_MissingMethod,
+  MethodIssue_ParamStructure,
   MethodParamIssue_MissingParam,
-  MethodIssue_ParamStructure, MethodResultIssue_Required,
-  MethodResultIssue_Schema
+  MethodResultIssue_Required,
+  MethodResultIssue_Schema,
 } from './issues';
-import {todo} from "node:test";
 
 // Returns a MethodMap containing only the method at index i
 const createTestMethodMap = (methods: MethodOrReference[], target: string) => {
@@ -68,8 +69,8 @@ describe('compare methods', () => {
   });
 
   it('should report an issue if a method has a different parameter schema', () => {
-    todo()
-  })
+    todo();
+  });
 
   it('should report an issue if a method has different param structure', () => {
     const METHOD = 'DifferentParamStructure';
@@ -78,7 +79,7 @@ describe('compare methods', () => {
     const test = createTestMethodMap(testDoc.methods, METHOD);
 
     const methodName: string = Object.keys(ref)[0];
-    const expectedStructure = (ref[methodName] as MethodObject).paramStructure
+    const expectedStructure = (ref[methodName] as MethodObject).paramStructure;
 
     const res = methodDiff(methodName, ref, test);
 
@@ -98,8 +99,8 @@ describe('compare methods', () => {
 
     const res = methodDiff(methodName, ref, test);
 
-    const expectedReq = (ref[METHOD].result as ContentDescriptorObject).required
-    const actualReq = (test[METHOD].result as ContentDescriptorObject).required
+    const expectedReq = (ref[METHOD].result as ContentDescriptorObject).required;
+    const actualReq = (test[METHOD].result as ContentDescriptorObject).required;
     const expectedIssue = [new MethodResultIssue_Required(expectedReq, actualReq)];
 
     expect(res).toHaveLength(1);
@@ -116,11 +117,9 @@ describe('compare methods', () => {
 
     const res = methodDiff(methodName, ref, test);
 
-    const expectedSchema = (ref[METHOD].result as ContentDescriptorObject).schema
-    const actualSchema = (test[METHOD].result as ContentDescriptorObject).schema
+    const expectedSchema = (ref[METHOD].result as ContentDescriptorObject).schema;
+    const actualSchema = (test[METHOD].result as ContentDescriptorObject).schema;
 
-    console.log(expectedSchema)
-    console.log(actualSchema)
     const expectedIssue = [new MethodResultIssue_Schema(expectedSchema, actualSchema)];
 
     expect(res).toHaveLength(1);
