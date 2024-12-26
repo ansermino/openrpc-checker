@@ -1,7 +1,7 @@
 import {program} from 'commander';
 import {parseOpenRPCDocument} from '@open-rpc/schema-utils-js';
-import {diff} from './diff.ts';
-import {printDiff} from './output.ts';
+import {diff} from './diff';
+import {printDiff} from './output';
 
 program.name('openrpc').version('0.0.0').description('');
 

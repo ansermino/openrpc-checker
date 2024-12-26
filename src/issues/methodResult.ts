@@ -1,5 +1,5 @@
 import {ContentDescriptorObjectRequired, JSONSchema} from '@open-rpc/meta-schema';
-import {DiffIssue} from './issue.ts';
+import {DiffIssue} from './issue';
 
 export class MethodResultIssue_Required extends DiffIssue {
   constructor(

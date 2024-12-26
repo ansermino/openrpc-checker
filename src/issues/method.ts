@@ -1,4 +1,4 @@
-import {DiffIssue} from './issue.ts';
+import {DiffIssue} from './issue';
 import {MethodObjectParamStructure} from '@open-rpc/meta-schema';
 
 // Returned when a method with the expected name does not exist

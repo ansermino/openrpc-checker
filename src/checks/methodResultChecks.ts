@@ -1,6 +1,6 @@
 import {ContentDescriptorObject} from '@open-rpc/meta-schema';
-import {DiffIssue} from "../issues/issue.js";
-import {MethodResultIssue_Schema, MethodResultIssue_Required} from '../issues/methodResult.ts';
+import {DiffIssue} from '../issues/issue';
+import {MethodResultIssue_Schema, MethodResultIssue_Required} from '../issues/methodResult';
 import {isDeepStrictEqual} from 'node:util';
 
 type MethodResultCheck = (expected: ContentDescriptorObject, actual: ContentDescriptorObject) => DiffIssue[];

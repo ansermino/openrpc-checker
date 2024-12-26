@@ -1,4 +1,4 @@
-import {DiffResults} from './diff.ts';
+import {DiffResults} from './diff';
 import {Table} from 'console-table-printer';
 
 export const printDiff = (results: DiffResults) => {
