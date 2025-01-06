@@ -7,7 +7,7 @@ export type MethodParamCheck = (expected: ContentDescriptorObject, actual: Conte
 const methodParamCheckRequired = (expected: ContentDescriptorObject, actual: ContentDescriptorObject): DiffIssue[] => {
   if (expected.required != actual.required) {
     // TODO: What if expected.require is undefined?
-    return [new MethodParamIssue_Required(expected.required)];
+    return [new MethodParamIssue_Required(expected.required, actual.required)];
   }
 
   return [];

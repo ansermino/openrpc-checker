@@ -30,6 +30,8 @@
     "@open-rpc/meta-schema": "^1.14.9",
     "@open-rpc/schema-utils-js": "^2.0.5",
     "commander": "^12.1.0",
-    "console-table-printer": "^2.12.1"
+    "console-table-printer": "^2.12.1",
+    "deep-object-diff": "^1.1.9",
+    "json-schema-ref-parser": "^9.0.9"
   }
 }
