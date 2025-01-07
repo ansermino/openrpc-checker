@@ -1,0 +1,25 @@
+name: Spec Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  spec-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: corepack enable
+      - name: Install deps
+        run: yarn --immutable
+      - name: Build
+        run: yarn build
+      - name: Run diff
+        run: ./bin/openrpc-checker diff -s tests/examples/lotus.json -t tests/examples/forest.json

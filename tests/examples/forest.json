@@ -1,0 +1,988 @@
+{
+  "openrpc": "1.3.2",
+  "info": {
+    "title": "forest",
+    "version": "0.20.0"
+  },
+  "methods": [
+    {
+      "name": "Filecoin.ChainExport",
+      "params": [
+        {
+          "name": "params",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/ChainExportParams"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainExport.Result",
+        "required": false,
+        "schema": {
+          "type": ["string", "null"]
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetBlock",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetBlock.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/BlockHeader"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetBlockMessages",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetBlockMessages.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/BlockMessages"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetEvents",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetEvents.Result",
+        "required": false,
+        "schema": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/components/schemas/Event"
+          }
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetGenesis",
+      "params": [],
+      "result": {
+        "name": "Filecoin.ChainGetGenesis.Result",
+        "required": false,
+        "schema": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/Tipset"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetMessage",
+      "params": [
+        {
+          "name": "msg_cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetMessage.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Message"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetMessagesInTipset",
+      "params": [
+        {
+          "name": "tsk",
+          "required": true,
+          "schema": {
+            "type": ["array", "null"],
+            "items": {
+              "$ref": "#/components/schemas/Cid"
+            }
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetMessagesInTipset.Result",
+        "required": false,
+        "schema": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/components/schemas/ApiMessage"
+          }
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetMinBaseFee",
+      "params": [
+        {
+          "name": "lookback",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "uint32",
+            "minimum": 0.0
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetMinBaseFee.Result",
+        "required": true,
+        "schema": {
+          "type": "string"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetParentMessages",
+      "params": [
+        {
+          "name": "block_cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetParentMessages.Result",
+        "required": false,
+        "schema": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/components/schemas/ApiMessage"
+          }
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetParentReceipts",
+      "params": [
+        {
+          "name": "block_cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetParentReceipts.Result",
+        "required": false,
+        "schema": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/components/schemas/ApiReceipt"
+          }
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetPath",
+      "params": [
+        {
+          "name": "from",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/NonEmpty_Array_of_Cid"
+          }
+        },
+        {
+          "name": "to",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/NonEmpty_Array_of_Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetPath.Result",
+        "required": false,
+        "schema": {
+          "type": ["array", "null"],
+          "items": {
+            "$ref": "#/components/schemas/PathChange_for_Tipset"
+          }
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetTipSet",
+      "params": [
+        {
+          "name": "tsk",
+          "required": true,
+          "schema": {
+            "type": ["array", "null"],
+            "items": {
+              "$ref": "#/components/schemas/Cid"
+            }
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetTipSet.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Tipset"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetTipSetAfterHeight",
+      "params": [
+        {
+          "name": "height",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        {
+          "name": "tsk",
+          "required": true,
+          "schema": {
+            "type": ["array", "null"],
+            "items": {
+              "$ref": "#/components/schemas/Cid"
+            }
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetTipSetAfterHeight.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Tipset"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainGetTipSetByHeight",
+      "params": [
+        {
+          "name": "height",
+          "required": true,
+          "schema": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        {
+          "name": "tsk",
+          "required": true,
+          "schema": {
+            "type": ["array", "null"],
+            "items": {
+              "$ref": "#/components/schemas/Cid"
+            }
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainGetTipSetByHeight.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Tipset"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainHasObj",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainHasObj.Result",
+        "required": true,
+        "schema": {
+          "type": "boolean"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainHead",
+      "params": [],
+      "result": {
+        "name": "Filecoin.ChainHead.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Tipset"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainReadObj",
+      "params": [
+        {
+          "name": "cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainReadObj.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Base64String"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainSetHead",
+      "params": [
+        {
+          "name": "tsk",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/NonEmpty_Array_of_Cid"
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainSetHead.Result",
+        "required": true,
+        "schema": {
+          "type": "null"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainStatObj",
+      "params": [
+        {
+          "name": "obj_cid",
+          "required": true,
+          "schema": {
+            "$ref": "#/components/schemas/Cid"
+          }
+        },
+        {
+          "name": "base_cid",
+          "required": true,
+          "schema": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/Cid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainStatObj.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/ObjStat"
+        }
+      },
+      "paramStructure": "by-position"
+    },
+    {
+      "name": "Filecoin.ChainTipSetWeight",
+      "params": [
+        {
+          "name": "tsk",
+          "required": true,
+          "schema": {
+            "type": ["array", "null"],
+            "items": {
+              "$ref": "#/components/schemas/Cid"
+            }
+          }
+        }
+      ],
+      "result": {
+        "name": "Filecoin.ChainTipSetWeight.Result",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/BigInt"
+        }
+      },
+      "paramStructure": "by-position"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Base64String": {
+        "type": ["string", "null"]
+      },
+      "ChainExportParams": {
+        "type": "object",
+        "required": ["dry_run", "epoch", "output_path", "recent_roots", "skip_checksum", "tipset_keys"],
+        "properties": {
+          "dry_run": {
+            "type": "boolean"
+          },
+          "epoch": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "output_path": {
+            "type": "string"
+          },
+          "recent_roots": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "skip_checksum": {
+            "type": "boolean"
+          },
+          "tipset_keys": {
+            "$ref": "#/components/schemas/Nullable_Array_of_Cid"
+          }
+        }
+      },
+      "Cid": {
+        "type": "object",
+        "required": ["/"],
+        "properties": {
+          "/": {
+            "type": "string"
+          }
+        }
+      },
+      "Nullable_Array_of_Cid": {
+        "type": ["array", "null"],
+        "items": {
+          "$ref": "#/components/schemas/Cid"
+        }
+      },
+      "BlockHeader": {
+        "type": "object",
+        "required": [
+          "BeaconEntries",
+          "ForkSignaling",
+          "Height",
+          "Messages",
+          "Miner",
+          "ParentBaseFee",
+          "ParentMessageReceipts",
+          "ParentStateRoot",
+          "ParentWeight",
+          "Parents",
+          "Timestamp",
+          "WinPoStProof"
+        ],
+        "properties": {
+          "BLSAggregate": {
+            "$ref": "#/components/schemas/Nullable_Signature"
+          },
+          "BeaconEntries": {
+            "$ref": "#/components/schemas/Nullable_Array_of_BeaconEntry"
+          },
+          "BlockSig": {
+            "$ref": "#/components/schemas/Nullable_Signature"
+          },
+          "ElectionProof": {
+            "$ref": "#/components/schemas/Nullable_ElectionProof"
+          },
+          "ForkSignaling": {
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "Height": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "Messages": {
+            "$ref": "#/components/schemas/Cid"
+          },
+          "Miner": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "ParentBaseFee": {
+            "$ref": "#/components/schemas/BigInt"
+          },
+          "ParentMessageReceipts": {
+            "$ref": "#/components/schemas/Cid"
+          },
+          "ParentStateRoot": {
+            "$ref": "#/components/schemas/Cid"
+          },
+          "ParentWeight": {
+            "$ref": "#/components/schemas/BigInt"
+          },
+          "Parents": {
+            "$ref": "#/components/schemas/NonEmpty_Array_of_Cid"
+          },
+          "Ticket": {
+            "$ref": "#/components/schemas/Nullable_Ticket"
+          },
+          "Timestamp": {
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "WinPoStProof": {
+            "$ref": "#/components/schemas/Nullable_Array_of_PoStProof"
+          }
+        }
+      },
+      "Nullable_Signature": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Signature"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "Signature": {
+        "type": "object",
+        "required": ["Data", "Type"],
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/Base64String"
+          },
+          "Type": {
+            "$ref": "#/components/schemas/SignatureTypeLotusJson"
+          }
+        }
+      },
+      "SignatureType": {
+        "description": "Signature variants for Filecoin signatures.",
+        "type": "string",
+        "enum": ["Secp256k1", "Bls", "Delegated"]
+      },
+      "SignatureTypeLotusJson": {
+        "anyOf": [
+          {
+            "type": "integer",
+            "format": "uint8",
+            "minimum": 0.0
+          },
+          {
+            "$ref": "#/components/schemas/SignatureType"
+          }
+        ]
+      },
+      "Nullable_Array_of_BeaconEntry": {
+        "type": ["array", "null"],
+        "items": {
+          "$ref": "#/components/schemas/BeaconEntry"
+        }
+      },
+      "BeaconEntry": {
+        "type": "object",
+        "required": ["Data", "Round"],
+        "properties": {
+          "Data": {
+            "$ref": "#/components/schemas/Base64String"
+          },
+          "Round": {
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          }
+        }
+      },
+      "Nullable_ElectionProof": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/ElectionProof"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "ElectionProof": {
+        "type": "object",
+        "required": ["VRFProof", "WinCount"],
+        "properties": {
+          "VRFProof": {
+            "$ref": "#/components/schemas/Base64String"
+          },
+          "WinCount": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "Address": {
+        "type": "string"
+      },
+      "BigInt": {
+        "type": "string"
+      },
+      "NonEmpty_Array_of_Cid": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Cid"
+        },
+        "minItems": 1
+      },
+      "Nullable_Ticket": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Ticket"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "Ticket": {
+        "type": "object",
+        "required": ["VRFProof"],
+        "properties": {
+          "VRFProof": {
+            "$ref": "#/components/schemas/Base64String"
+          }
+        }
+      },
+      "Nullable_Array_of_PoStProof": {
+        "type": ["array", "null"],
+        "items": {
+          "$ref": "#/components/schemas/PoStProof"
+        }
+      },
+      "PoStProof": {
+        "type": "object",
+        "required": ["PoStProof", "ProofBytes"],
+        "properties": {
+          "PoStProof": {
+            "$ref": "#/components/schemas/int64"
+          },
+          "ProofBytes": {
+            "$ref": "#/components/schemas/Base64String"
+          }
+        }
+      },
+      "int64": {
+        "type": "integer",
+        "format": "int64"
+      },
+      "BlockMessages": {
+        "type": "object",
+        "required": ["BlsMessages", "Cids", "SecpkMessages"],
+        "properties": {
+          "BlsMessages": {
+            "$ref": "#/components/schemas/Nullable_Array_of_Message"
+          },
+          "Cids": {
+            "$ref": "#/components/schemas/Nullable_Array_of_Cid"
+          },
+          "SecpkMessages": {
+            "$ref": "#/components/schemas/Nullable_Array_of_SignedMessage"
+          }
+        }
+      },
+      "Nullable_Array_of_Message": {
+        "type": ["array", "null"],
+        "items": {
+          "$ref": "#/components/schemas/Message"
+        }
+      },
+      "Message": {
+        "type": "object",
+        "required": ["From", "To"],
+        "properties": {
+          "From": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "GasFeeCap": {
+            "default": "0",
+            "$ref": "#/components/schemas/BigInt"
+          },
+          "GasLimit": {
+            "default": 0,
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "GasPremium": {
+            "default": "0",
+            "$ref": "#/components/schemas/BigInt"
+          },
+          "Method": {
+            "default": 0,
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "Nonce": {
+            "default": 0,
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "Params": {
+            "$ref": "#/components/schemas/Nullable_Base64String"
+          },
+          "To": {
+            "$ref": "#/components/schemas/Address"
+          },
+          "Value": {
+            "default": "0",
+            "$ref": "#/components/schemas/BigInt"
+          },
+          "Version": {
+            "default": 0,
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          }
+        }
+      },
+      "Nullable_Base64String": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Base64String"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "Nullable_Array_of_SignedMessage": {
+        "type": ["array", "null"],
+        "items": {
+          "$ref": "#/components/schemas/SignedMessage"
+        }
+      },
+      "SignedMessage": {
+        "type": "object",
+        "required": ["Message", "Signature"],
+        "properties": {
+          "CID": {
+            "$ref": "#/components/schemas/Nullable_Cid"
+          },
+          "Message": {
+            "$ref": "#/components/schemas/Message"
+          },
+          "Signature": {
+            "$ref": "#/components/schemas/Signature"
+          }
+        }
+      },
+      "Nullable_Cid": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Cid"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "Event": {
+        "type": "object",
+        "required": ["Emitter", "Entries"],
+        "properties": {
+          "Emitter": {
+            "description": "Actor ID",
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "Entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EventEntry"
+            }
+          }
+        }
+      },
+      "EventEntry": {
+        "type": "object",
+        "required": ["Codec", "Flags", "Key", "Value"],
+        "properties": {
+          "Codec": {
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "Flags": {
+            "type": "integer",
+            "format": "uint8",
+            "minimum": 0.0
+          },
+          "Key": {
+            "type": "string"
+          },
+          "Value": {
+            "$ref": "#/components/schemas/Base64String"
+          }
+        }
+      },
+      "Tipset": {
+        "$ref": "#/components/schemas/TipsetInner"
+      },
+      "TipsetInner": {
+        "type": "object",
+        "required": ["Blocks", "Cids", "Height"],
+        "properties": {
+          "Blocks": {
+            "$ref": "#/components/schemas/NonEmpty_Array_of_BlockHeader"
+          },
+          "Cids": {
+            "$ref": "#/components/schemas/NonEmpty_Array_of_Cid"
+          },
+          "Height": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "NonEmpty_Array_of_BlockHeader": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/BlockHeader"
+        },
+        "minItems": 1
+      },
+      "ApiMessage": {
+        "type": "object",
+        "required": ["Cid", "Message"],
+        "properties": {
+          "Cid": {
+            "$ref": "#/components/schemas/Cid"
+          },
+          "Message": {
+            "$ref": "#/components/schemas/Message"
+          }
+        }
+      },
+      "ApiReceipt": {
+        "type": "object",
+        "required": ["EventsRoot", "ExitCode", "GasUsed", "Return"],
+        "properties": {
+          "EventsRoot": {
+            "$ref": "#/components/schemas/Nullable_Cid"
+          },
+          "ExitCode": {
+            "$ref": "#/components/schemas/ExitCode"
+          },
+          "GasUsed": {
+            "type": "integer",
+            "format": "uint64",
+            "minimum": 0.0
+          },
+          "Return": {
+            "$ref": "#/components/schemas/Base64String"
+          }
+        }
+      },
+      "ExitCode": {
+        "description": "`Newtype` wrapper for the FVM `ExitCode`.\n\n# Examples ``` # use forest_filecoin::doctest_private::ExitCode; let fvm2_success = fvm_shared2::error::ExitCode::new(0); let fvm3_success = fvm_shared3::error::ExitCode::new(0);\n\nlet shim_from_v2 = ExitCode::from(fvm2_success); let shim_from_v3 = ExitCode::from(fvm3_success);\n\nassert_eq!(shim_from_v2, shim_from_v3); assert_eq!(shim_from_v2, fvm2_success.into()); assert_eq!(shim_from_v3, fvm3_success.into()); ```",
+        "type": "integer",
+        "format": "uint32",
+        "minimum": 0.0
+      },
+      "PathChange_for_Tipset": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["Type", "Val"],
+            "properties": {
+              "Type": {
+                "type": "string",
+                "enum": ["revert"]
+              },
+              "Val": {
+                "$ref": "#/components/schemas/Tipset"
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": ["Type", "Val"],
+            "properties": {
+              "Type": {
+                "type": "string",
+                "enum": ["apply"]
+              },
+              "Val": {
+                "$ref": "#/components/schemas/Tipset"
+              }
+            }
+          }
+        ]
+      },
+      "ObjStat": {
+        "type": "object",
+        "required": ["Links", "Size"],
+        "properties": {
+          "Links": {
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0.0
+          },
+          "Size": {
+            "type": "integer",
+            "format": "uint",
+            "minimum": 0.0
+          }
+        }
+      }
+    }
+  }
+}
