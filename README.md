@@ -43,8 +43,34 @@ Options:
   -h, --help           display help for command
 ```
 
-# Contributing
+# Checks
+
+All documents are examined at three levels:
+- `$method` - compare the top-level fields inside a method definition
+- `$method.params` - compare each of the parameters for the given method
+- `$method.result` - compare the result of the given method
+
+Currently the following checks are supported:
+- `$method`
+  - `name` MUST be equal
+  - `param-structure` MUST be equal
+- `$method.params`
+  - `required` MUST be equal
+  - `schema` MUST be equivalent
+- `$method.result`
+  - `required` MUST be equal
+  - `schema` MUST be equivalent
 
 ## Adding Additional Checks
 
-[TODO]
+Each check requires two components:
+- a check function
+- an issue
+
+Check functions are implemented in `src/checks`. Ensure that new checks are added to the corresponding array at the bottom of the file. This will add them to the set of checks invoked on each run.
+
+Issues are implemented in `src/issues`. The message passed to the `super()` constructor will be used to print the issue details if one is found. 
+
+Once you have created a check function and a corresponding issue type, create a test in `src/diff.spec.ts`. 
+
+Lastly, make sure to specify the check in the list above.
