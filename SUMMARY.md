@@ -104,7 +104,14 @@ For the `Filecoin.StateCall` method the return type contains a circular definiti
 },
 ```
 
-This definition is valid per the JSON Schema and OpenRPC specifications. Using a general JSONSchema parser (eg. [@apidevtools/json-schema-ref-parser](https://github.com/APIDevTools/json-schema-ref-parser)) it can be parsed successfully. However, using the OpenRPC tooling this results in an OOM crash.
+This definition is valid per the JSON Schema and OpenRPC specifications. Using a general JSONSchema parser (eg. 
+[@apidevtools/json-schema-ref-parser](https://github.com/APIDevTools/json-schema-ref-parser)) it can be parsed 
+successfully. However, using the OpenRPC tooling this results in an OOM crash. An reproducible has been created 
+here: https://github.com/ansermino/openrpc-oom-demo. (Note: While the document is parsed correctly, interacting with 
+the result also has issues).
+
+Additionally, the flag `--ref-parse` can be used in 
+`openrpc-checker` to use `json-schema-ref-parser` instead of the OpenRPC tooling.
 
 > Note: The OpenRPC playground uses a general JSONSchema parser to successfully load and interact with this definition. This suggests its the tooling, not the definition, that is the issue.
 
