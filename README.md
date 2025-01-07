@@ -6,6 +6,8 @@ A small utility to validate and compare OpenRPC documents.
 
 ```shell
 yarn
+yarn build
+./bin/openrpc-checker --help
 ```
 
 # Usage

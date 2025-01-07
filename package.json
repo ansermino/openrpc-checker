@@ -1,5 +1,5 @@
 {
-  "name": "openrpc-diff",
+  "name": "openrpc-checker",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -33,5 +33,8 @@
     "console-table-printer": "^2.12.1",
     "deep-object-diff": "^1.1.9",
     "json-schema-ref-parser": "^9.0.9"
+  },
+  "bin": {
+    "openrpc-checker": "bin/openrpc-checker"
   }
 }

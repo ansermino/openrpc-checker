@@ -1,7 +1,7 @@
 import {program} from 'commander';
 import {checkCmd, diffCmd} from './cmd';
 
-program.name('openrpc').version('0.0.0').description('');
+program.name('openrpc-checker').version('0.0.0').description('');
 
 program
   .command('diff')
