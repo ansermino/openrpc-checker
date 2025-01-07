@@ -24,8 +24,8 @@ describe('compare methods', () => {
   let testDoc: OpenrpcDocument;
 
   beforeAll(async () => {
-    referenceDoc = await parseOpenRPCDocument('./tests/validation-checks/valid.json');
-    testDoc = await parseOpenRPCDocument('./tests/validation-checks/test.json');
+    referenceDoc = await parseOpenRPCDocument('./tests/unit-tests/valid.json');
+    testDoc = await parseOpenRPCDocument('./tests/unit-tests/test.json');
   });
 
   it('should consider two identical methods as the same', () => {

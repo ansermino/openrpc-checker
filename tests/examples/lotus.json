@@ -1,0 +1,1883 @@
+{
+  "openrpc": "1.2.6",
+  "info": {
+    "title": "Lotus RPC API",
+    "version": "1.27.0"
+  },
+  "methods": [
+    {
+      "name": "Filecoin.ChainBlockstoreInfo",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainBlockstoreInfo(p0 context.Context) (map[string]interface{}, error) {\n\tif s.Internal.ChainBlockstoreInfo == nil {\n\t\treturn *new(map[string]interface{}), ErrNotSupported\n\t}\n\treturn s.Internal.ChainBlockstoreInfo(p0)\n}\n```",
+      "summary": "ChainBlockstoreInfo returns some basic information about the blockstore\n",
+      "paramStructure": "by-position",
+      "params": [],
+      "result": {
+        "name": "map[string]interface{}",
+        "description": "map[string]interface{}",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "abc": 123
+            }
+          ],
+          "patternProperties": {
+            ".*": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1655"
+      }
+    },
+    {
+      "name": "Filecoin.ChainCheckBlockstore",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainCheckBlockstore(p0 context.Context) error {\n\tif s.Internal.ChainCheckBlockstore == nil {\n\t\treturn ErrNotSupported\n\t}\n\treturn s.Internal.ChainCheckBlockstore(p0)\n}\n```",
+      "summary": "ChainCheckBlockstore performs an (asynchronous) health check on the chain/state blockstore\nif supported by the underlying implementation.\n",
+      "paramStructure": "by-position",
+      "params": [],
+      "result": {
+        "name": "Null",
+        "description": "Null",
+        "schema": {
+          "type": ["null"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1666"
+      }
+    },
+    {
+      "name": "Filecoin.ChainDeleteObj",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainDeleteObj(p0 context.Context, p1 cid.Cid) error {\n\tif s.Internal.ChainDeleteObj == nil {\n\t\treturn ErrNotSupported\n\t}\n\treturn s.Internal.ChainDeleteObj(p0, p1)\n}\n```",
+      "summary": "ChainDeleteObj deletes node referenced by the given CID\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "Null",
+        "description": "Null",
+        "schema": {
+          "type": ["null"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1677"
+      }
+    },
+    {
+      "name": "Filecoin.ChainExportRangeInternal",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainExportRangeInternal(p0 context.Context, p1 types.TipSetKey, p2 types.TipSetKey, p3 ChainExportConfig) error {\n\tif s.Internal.ChainExportRangeInternal == nil {\n\t\treturn ErrNotSupported\n\t}\n\treturn s.Internal.ChainExportRangeInternal(p0, p1, p2, p3)\n}\n```",
+      "summary": "ChainExportRangeInternal triggers the export of a chain\nCAR-snapshot directly to disk. It is similar to ChainExport,\nexcept, depending on options, the snapshot can include receipts,\nmessages and stateroots for the length between the specified head\nand tail, thus producing \"archival-grade\" snapshots that include\nall the on-chain data.  The header chain is included back to\ngenesis and these snapshots can be used to initialize Filecoin\nnodes.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        },
+        {
+          "name": "p2",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        },
+        {
+          "name": "p3",
+          "description": "ChainExportConfig",
+          "summary": "",
+          "schema": {
+            "examples": [
+              {
+                "WriteBufferSize": 123,
+                "NumWorkers": 123,
+                "IncludeMessages": true,
+                "IncludeReceipts": true,
+                "IncludeStateRoots": true
+              }
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "IncludeMessages": {
+                "type": "boolean"
+              },
+              "IncludeReceipts": {
+                "type": "boolean"
+              },
+              "IncludeStateRoots": {
+                "type": "boolean"
+              },
+              "NumWorkers": {
+                "title": "number",
+                "type": "number"
+              },
+              "WriteBufferSize": {
+                "title": "number",
+                "type": "number"
+              }
+            },
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "Null",
+        "description": "Null",
+        "schema": {
+          "type": ["null"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1699"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetBlock",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetBlock(p0 context.Context, p1 cid.Cid) (*types.BlockHeader, error) {\n\tif s.Internal.ChainGetBlock == nil {\n\t\treturn nil, ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetBlock(p0, p1)\n}\n```",
+      "summary": "ChainGetBlock returns the block specified by the given CID.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "*types.BlockHeader",
+        "description": "*types.BlockHeader",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "Miner": "f01234",
+              "Ticket": {
+                "VRFProof": "Ynl0ZSBhcnJheQ=="
+              },
+              "ElectionProof": {
+                "WinCount": 9,
+                "VRFProof": "Ynl0ZSBhcnJheQ=="
+              },
+              "BeaconEntries": [
+                {
+                  "Round": 42,
+                  "Data": "Ynl0ZSBhcnJheQ=="
+                }
+              ],
+              "WinPoStProof": [
+                {
+                  "PoStProof": 8,
+                  "ProofBytes": "Ynl0ZSBhcnJheQ=="
+                }
+              ],
+              "Parents": [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                }
+              ],
+              "ParentWeight": "0",
+              "Height": 10101,
+              "ParentStateRoot": {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              },
+              "ParentMessageReceipts": {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              },
+              "Messages": {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              },
+              "BLSAggregate": {
+                "Type": 2,
+                "Data": "Ynl0ZSBhcnJheQ=="
+              },
+              "Timestamp": 42,
+              "BlockSig": {
+                "Type": 2,
+                "Data": "Ynl0ZSBhcnJheQ=="
+              },
+              "ForkSignaling": 42,
+              "ParentBaseFee": "0"
+            }
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "BLSAggregate": {
+              "additionalProperties": false,
+              "properties": {
+                "Data": {
+                  "media": {
+                    "binaryEncoding": "base64"
+                  },
+                  "type": "string"
+                },
+                "Type": {
+                  "title": "number",
+                  "type": "number"
+                }
+              },
+              "type": "object"
+            },
+            "BeaconEntries": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "Data": {
+                    "media": {
+                      "binaryEncoding": "base64"
+                    },
+                    "type": "string"
+                  },
+                  "Round": {
+                    "title": "number",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "BlockSig": {
+              "additionalProperties": false,
+              "properties": {
+                "Data": {
+                  "media": {
+                    "binaryEncoding": "base64"
+                  },
+                  "type": "string"
+                },
+                "Type": {
+                  "title": "number",
+                  "type": "number"
+                }
+              },
+              "type": "object"
+            },
+            "ElectionProof": {
+              "additionalProperties": false,
+              "properties": {
+                "VRFProof": {
+                  "media": {
+                    "binaryEncoding": "base64"
+                  },
+                  "type": "string"
+                },
+                "WinCount": {
+                  "title": "number",
+                  "type": "number"
+                }
+              },
+              "type": "object"
+            },
+            "ForkSignaling": {
+              "title": "number",
+              "type": "number"
+            },
+            "Height": {
+              "title": "number",
+              "type": "number"
+            },
+            "Messages": {
+              "title": "Content Identifier",
+              "type": "string"
+            },
+            "Miner": {
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "ParentBaseFee": {
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "ParentMessageReceipts": {
+              "title": "Content Identifier",
+              "type": "string"
+            },
+            "ParentStateRoot": {
+              "title": "Content Identifier",
+              "type": "string"
+            },
+            "ParentWeight": {
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "Parents": {
+              "items": {
+                "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+                "title": "Content Identifier",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "Ticket": {
+              "additionalProperties": false,
+              "properties": {
+                "VRFProof": {
+                  "media": {
+                    "binaryEncoding": "base64"
+                  },
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "Timestamp": {
+              "title": "number",
+              "type": "number"
+            },
+            "WinPoStProof": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "PoStProof": {
+                    "title": "number",
+                    "type": "number"
+                  },
+                  "ProofBytes": {
+                    "media": {
+                      "binaryEncoding": "base64"
+                    },
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1710"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetBlockMessages",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetBlockMessages(p0 context.Context, p1 cid.Cid) (*BlockMessages, error) {\n\tif s.Internal.ChainGetBlockMessages == nil {\n\t\treturn nil, ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetBlockMessages(p0, p1)\n}\n```",
+      "summary": "ChainGetBlockMessages returns messages stored in the specified block.\n\nNote: If there are multiple blocks in a tipset, it's likely that some\nmessages will be duplicated. It's also possible for blocks in a tipset to have\ndifferent messages from the same sender at the same nonce. When that happens,\nonly the first message (in a block with lowest ticket) will be considered\nfor execution\n\nNOTE: THIS METHOD SHOULD ONLY BE USED FOR GETTING MESSAGES IN A SPECIFIC BLOCK\n\nDO NOT USE THIS METHOD TO GET MESSAGES INCLUDED IN A TIPSET\nUse ChainGetParentMessages, which will perform correct message deduplication\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "*BlockMessages",
+        "description": "*BlockMessages",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "BlsMessages": [
+                {
+                  "Version": 42,
+                  "To": "f01234",
+                  "From": "f01234",
+                  "Nonce": 42,
+                  "Value": "0",
+                  "GasLimit": 9,
+                  "GasFeeCap": "0",
+                  "GasPremium": "0",
+                  "Method": 1,
+                  "Params": "Ynl0ZSBhcnJheQ==",
+                  "CID": {
+                    "/": "bafy2bzacebbpdegvr3i4cosewthysg5xkxpqfn2wfcz6mv2hmoktwbdxkax4s"
+                  }
+                }
+              ],
+              "SecpkMessages": [
+                {
+                  "Message": {
+                    "Version": 42,
+                    "To": "f01234",
+                    "From": "f01234",
+                    "Nonce": 42,
+                    "Value": "0",
+                    "GasLimit": 9,
+                    "GasFeeCap": "0",
+                    "GasPremium": "0",
+                    "Method": 1,
+                    "Params": "Ynl0ZSBhcnJheQ==",
+                    "CID": {
+                      "/": "bafy2bzacebbpdegvr3i4cosewthysg5xkxpqfn2wfcz6mv2hmoktwbdxkax4s"
+                    }
+                  },
+                  "Signature": {
+                    "Type": 2,
+                    "Data": "Ynl0ZSBhcnJheQ=="
+                  },
+                  "CID": {
+                    "/": "bafy2bzacebbpdegvr3i4cosewthysg5xkxpqfn2wfcz6mv2hmoktwbdxkax4s"
+                  }
+                }
+              ],
+              "Cids": [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                }
+              ]
+            }
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "BlsMessages": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "From": {
+                    "additionalProperties": false,
+                    "type": "object"
+                  },
+                  "GasFeeCap": {
+                    "additionalProperties": false,
+                    "type": "object"
+                  },
+                  "GasLimit": {
+                    "title": "number",
+                    "type": "number"
+                  },
+                  "GasPremium": {
+                    "additionalProperties": false,
+                    "type": "object"
+                  },
+                  "Method": {
+                    "title": "number",
+                    "type": "number"
+                  },
+                  "Nonce": {
+                    "title": "number",
+                    "type": "number"
+                  },
+                  "Params": {
+                    "media": {
+                      "binaryEncoding": "base64"
+                    },
+                    "type": "string"
+                  },
+                  "To": {
+                    "additionalProperties": false,
+                    "type": "object"
+                  },
+                  "Value": {
+                    "additionalProperties": false,
+                    "type": "object"
+                  },
+                  "Version": {
+                    "title": "number",
+                    "type": "number"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            },
+            "Cids": {
+              "items": {
+                "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+                "title": "Content Identifier",
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "SecpkMessages": {
+              "items": {
+                "additionalProperties": false,
+                "properties": {
+                  "Message": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "From": {
+                        "additionalProperties": false,
+                        "type": "object"
+                      },
+                      "GasFeeCap": {
+                        "additionalProperties": false,
+                        "type": "object"
+                      },
+                      "GasLimit": {
+                        "title": "number",
+                        "type": "number"
+                      },
+                      "GasPremium": {
+                        "additionalProperties": false,
+                        "type": "object"
+                      },
+                      "Method": {
+                        "title": "number",
+                        "type": "number"
+                      },
+                      "Nonce": {
+                        "title": "number",
+                        "type": "number"
+                      },
+                      "Params": {
+                        "media": {
+                          "binaryEncoding": "base64"
+                        },
+                        "type": "string"
+                      },
+                      "To": {
+                        "additionalProperties": false,
+                        "type": "object"
+                      },
+                      "Value": {
+                        "additionalProperties": false,
+                        "type": "object"
+                      },
+                      "Version": {
+                        "title": "number",
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "Signature": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "Data": {
+                        "media": {
+                          "binaryEncoding": "base64"
+                        },
+                        "type": "string"
+                      },
+                      "Type": {
+                        "title": "number",
+                        "type": "number"
+                      }
+                    },
+                    "type": "object"
+                  }
+                },
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1721"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetEvents",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetEvents(p0 context.Context, p1 cid.Cid) ([]types.Event, error) {\n\tif s.Internal.ChainGetEvents == nil {\n\t\treturn *new([]types.Event), ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetEvents(p0, p1)\n}\n```",
+      "summary": "ChainGetEvents returns the events under an event AMT root CID.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "[]types.Event",
+        "description": "[]types.Event",
+        "summary": "",
+        "schema": {
+          "examples": [
+            [
+              {
+                "Emitter": 1000,
+                "Entries": [
+                  {
+                    "Flags": 7,
+                    "Key": "string value",
+                    "Codec": 42,
+                    "Value": "Ynl0ZSBhcnJheQ=="
+                  }
+                ]
+              }
+            ]
+          ],
+          "items": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "Emitter": {
+                  "title": "number",
+                  "type": "number"
+                },
+                "Entries": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "Codec": {
+                        "title": "number",
+                        "type": "number"
+                      },
+                      "Flags": {
+                        "title": "number",
+                        "type": "number"
+                      },
+                      "Key": {
+                        "type": "string"
+                      },
+                      "Value": {
+                        "media": {
+                          "binaryEncoding": "base64"
+                        },
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": ["object"]
+            }
+          ],
+          "type": ["array"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1732"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetGenesis",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetGenesis(p0 context.Context) (*types.TipSet, error) {\n\tif s.Internal.ChainGetGenesis == nil {\n\t\treturn nil, ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetGenesis(p0)\n}\n```",
+      "summary": "ChainGetGenesis returns the genesis tipset.\n",
+      "paramStructure": "by-position",
+      "params": [],
+      "result": {
+        "name": "*types.TipSet",
+        "description": "*types.TipSet",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "Cids": null,
+              "Blocks": null,
+              "Height": 0
+            }
+          ],
+          "additionalProperties": false,
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1743"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetMessage",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetMessage(p0 context.Context, p1 cid.Cid) (*types.Message, error) {\n\tif s.Internal.ChainGetMessage == nil {\n\t\treturn nil, ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetMessage(p0, p1)\n}\n```",
+      "summary": "ChainGetMessage reads a message referenced by the specified CID from the\nchain blockstore.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "*types.Message",
+        "description": "*types.Message",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "Version": 42,
+              "To": "f01234",
+              "From": "f01234",
+              "Nonce": 42,
+              "Value": "0",
+              "GasLimit": 9,
+              "GasFeeCap": "0",
+              "GasPremium": "0",
+              "Method": 1,
+              "Params": "Ynl0ZSBhcnJheQ==",
+              "CID": {
+                "/": "bafy2bzacebbpdegvr3i4cosewthysg5xkxpqfn2wfcz6mv2hmoktwbdxkax4s"
+              }
+            }
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "From": {
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "GasFeeCap": {
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "GasLimit": {
+              "title": "number",
+              "type": "number"
+            },
+            "GasPremium": {
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "Method": {
+              "title": "number",
+              "type": "number"
+            },
+            "Nonce": {
+              "title": "number",
+              "type": "number"
+            },
+            "Params": {
+              "media": {
+                "binaryEncoding": "base64"
+              },
+              "type": "string"
+            },
+            "To": {
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "Value": {
+              "additionalProperties": false,
+              "type": "object"
+            },
+            "Version": {
+              "title": "number",
+              "type": "number"
+            }
+          },
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1754"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetMessagesInTipset",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetMessagesInTipset(p0 context.Context, p1 types.TipSetKey) ([]Message, error) {\n\tif s.Internal.ChainGetMessagesInTipset == nil {\n\t\treturn *new([]Message), ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetMessagesInTipset(p0, p1)\n}\n```",
+      "summary": "ChainGetMessagesInTipset returns message stores in current tipset\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "[]Message",
+        "description": "[]Message",
+        "summary": "",
+        "schema": {
+          "examples": [
+            [
+              {
+                "Cid": {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                "Message": {
+                  "Version": 42,
+                  "To": "f01234",
+                  "From": "f01234",
+                  "Nonce": 42,
+                  "Value": "0",
+                  "GasLimit": 9,
+                  "GasFeeCap": "0",
+                  "GasPremium": "0",
+                  "Method": 1,
+                  "Params": "Ynl0ZSBhcnJheQ==",
+                  "CID": {
+                    "/": "bafy2bzacebbpdegvr3i4cosewthysg5xkxpqfn2wfcz6mv2hmoktwbdxkax4s"
+                  }
+                }
+              }
+            ]
+          ],
+          "items": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "Cid": {
+                  "title": "Content Identifier",
+                  "type": "string"
+                },
+                "Message": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "Cid": {
+                      "title": "Content Identifier",
+                      "type": "string"
+                    },
+                    "Message": {}
+                  },
+                  "type": "object"
+                }
+              },
+              "type": ["object"]
+            }
+          ],
+          "type": ["array"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1765"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetNode",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetNode(p0 context.Context, p1 string) (*IpldObject, error) {\n\tif s.Internal.ChainGetNode == nil {\n\t\treturn nil, ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetNode(p0, p1)\n}\n```",
+      "summary": "",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "string",
+          "summary": "",
+          "schema": {
+            "examples": ["string value"],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "*IpldObject",
+        "description": "*IpldObject",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "Cid": {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              },
+              "Obj": {}
+            }
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Cid": {
+              "title": "Content Identifier",
+              "type": "string"
+            },
+            "Obj": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1776"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetParentMessages",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetParentMessages(p0 context.Context, p1 cid.Cid) ([]Message, error) {\n\tif s.Internal.ChainGetParentMessages == nil {\n\t\treturn *new([]Message), ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetParentMessages(p0, p1)\n}\n```",
+      "summary": "ChainGetParentMessages returns messages stored in parent tipset of the\nspecified block.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "[]Message",
+        "description": "[]Message",
+        "summary": "",
+        "schema": {
+          "examples": [
+            [
+              {
+                "Cid": {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                "Message": {
+                  "Version": 42,
+                  "To": "f01234",
+                  "From": "f01234",
+                  "Nonce": 42,
+                  "Value": "0",
+                  "GasLimit": 9,
+                  "GasFeeCap": "0",
+                  "GasPremium": "0",
+                  "Method": 1,
+                  "Params": "Ynl0ZSBhcnJheQ==",
+                  "CID": {
+                    "/": "bafy2bzacebbpdegvr3i4cosewthysg5xkxpqfn2wfcz6mv2hmoktwbdxkax4s"
+                  }
+                }
+              }
+            ]
+          ],
+          "items": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "Cid": {
+                  "title": "Content Identifier",
+                  "type": "string"
+                },
+                "Message": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "Cid": {
+                      "title": "Content Identifier",
+                      "type": "string"
+                    },
+                    "Message": {}
+                  },
+                  "type": "object"
+                }
+              },
+              "type": ["object"]
+            }
+          ],
+          "type": ["array"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1787"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetParentReceipts",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetParentReceipts(p0 context.Context, p1 cid.Cid) ([]*types.MessageReceipt, error) {\n\tif s.Internal.ChainGetParentReceipts == nil {\n\t\treturn *new([]*types.MessageReceipt), ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetParentReceipts(p0, p1)\n}\n```",
+      "summary": "ChainGetParentReceipts returns receipts for messages in parent tipset of\nthe specified block. The receipts in the list returned is one-to-one with the\nmessages returned by a call to ChainGetParentMessages with the same blockCid.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "[]*types.MessageReceipt",
+        "description": "[]*types.MessageReceipt",
+        "summary": "",
+        "schema": {
+          "examples": [
+            [
+              {
+                "ExitCode": 0,
+                "Return": "Ynl0ZSBhcnJheQ==",
+                "GasUsed": 9,
+                "EventsRoot": {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                }
+              }
+            ]
+          ],
+          "items": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "EventsRoot": {
+                  "title": "Content Identifier",
+                  "type": "string"
+                },
+                "ExitCode": {
+                  "title": "number",
+                  "type": "number"
+                },
+                "GasUsed": {
+                  "title": "number",
+                  "type": "number"
+                },
+                "Return": {
+                  "media": {
+                    "binaryEncoding": "base64"
+                  },
+                  "type": "string"
+                }
+              },
+              "type": ["object"]
+            }
+          ],
+          "type": ["array"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1798"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetPath",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetPath(p0 context.Context, p1 types.TipSetKey, p2 types.TipSetKey) ([]*HeadChange, error) {\n\tif s.Internal.ChainGetPath == nil {\n\t\treturn *new([]*HeadChange), ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetPath(p0, p1, p2)\n}\n```",
+      "summary": "ChainGetPath returns a set of revert/apply operations needed to get from\none tipset to another, for example:\n```\n       to\n        ^\nfrom   tAA\n  ^     ^\ntBA    tAB\n ^---*--^\n     ^\n    tRR\n```\nWould return `[revert(tBA), apply(tAB), apply(tAA)]`\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        },
+        {
+          "name": "p2",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "[]*HeadChange",
+        "description": "[]*HeadChange",
+        "summary": "",
+        "schema": {
+          "examples": [
+            [
+              {
+                "Type": "string value",
+                "Val": {
+                  "Cids": null,
+                  "Blocks": null,
+                  "Height": 0
+                }
+              }
+            ]
+          ],
+          "items": [
+            {
+              "additionalProperties": false,
+              "properties": {
+                "Type": {
+                  "type": "string"
+                },
+                "Val": {
+                  "additionalProperties": false,
+                  "type": "object"
+                }
+              },
+              "type": ["object"]
+            }
+          ],
+          "type": ["array"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1809"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetTipSet",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetTipSet(p0 context.Context, p1 types.TipSetKey) (*types.TipSet, error) {\n\tif s.Internal.ChainGetTipSet == nil {\n\t\treturn nil, ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetTipSet(p0, p1)\n}\n```",
+      "summary": "ChainGetTipSet returns the tipset specified by the given TipSetKey.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "*types.TipSet",
+        "description": "*types.TipSet",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "Cids": null,
+              "Blocks": null,
+              "Height": 0
+            }
+          ],
+          "additionalProperties": false,
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1820"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetTipSetAfterHeight",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetTipSetAfterHeight(p0 context.Context, p1 abi.ChainEpoch, p2 types.TipSetKey) (*types.TipSet, error) {\n\tif s.Internal.ChainGetTipSetAfterHeight == nil {\n\t\treturn nil, ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetTipSetAfterHeight(p0, p1, p2)\n}\n```",
+      "summary": "ChainGetTipSetAfterHeight looks back for a tipset at the specified epoch.\nIf there are no blocks at the specified epoch, the first non-nil tipset at a later epoch\nwill be returned.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "abi.ChainEpoch",
+          "summary": "",
+          "schema": {
+            "title": "number",
+            "description": "Number is a number",
+            "examples": [10101],
+            "type": ["number"]
+          },
+          "required": true,
+          "deprecated": false
+        },
+        {
+          "name": "p2",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "*types.TipSet",
+        "description": "*types.TipSet",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "Cids": null,
+              "Blocks": null,
+              "Height": 0
+            }
+          ],
+          "additionalProperties": false,
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1831"
+      }
+    },
+    {
+      "name": "Filecoin.ChainGetTipSetByHeight",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainGetTipSetByHeight(p0 context.Context, p1 abi.ChainEpoch, p2 types.TipSetKey) (*types.TipSet, error) {\n\tif s.Internal.ChainGetTipSetByHeight == nil {\n\t\treturn nil, ErrNotSupported\n\t}\n\treturn s.Internal.ChainGetTipSetByHeight(p0, p1, p2)\n}\n```",
+      "summary": "ChainGetTipSetByHeight looks back for a tipset at the specified epoch.\nIf there are no blocks at the specified epoch, a tipset at an earlier epoch\nwill be returned.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "abi.ChainEpoch",
+          "summary": "",
+          "schema": {
+            "title": "number",
+            "description": "Number is a number",
+            "examples": [10101],
+            "type": ["number"]
+          },
+          "required": true,
+          "deprecated": false
+        },
+        {
+          "name": "p2",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "*types.TipSet",
+        "description": "*types.TipSet",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "Cids": null,
+              "Blocks": null,
+              "Height": 0
+            }
+          ],
+          "additionalProperties": false,
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1842"
+      }
+    },
+    {
+      "name": "Filecoin.ChainHasObj",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainHasObj(p0 context.Context, p1 cid.Cid) (bool, error) {\n\tif s.Internal.ChainHasObj == nil {\n\t\treturn false, ErrNotSupported\n\t}\n\treturn s.Internal.ChainHasObj(p0, p1)\n}\n```",
+      "summary": "ChainHasObj checks if a given CID exists in the chain blockstore.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "bool",
+        "description": "bool",
+        "summary": "",
+        "schema": {
+          "examples": [true],
+          "type": ["boolean"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1853"
+      }
+    },
+    {
+      "name": "Filecoin.ChainHead",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainHead(p0 context.Context) (*types.TipSet, error) {\n\tif s.Internal.ChainHead == nil {\n\t\treturn nil, ErrNotSupported\n\t}\n\treturn s.Internal.ChainHead(p0)\n}\n```",
+      "summary": "ChainHead returns the current head of the chain.\n",
+      "paramStructure": "by-position",
+      "params": [],
+      "result": {
+        "name": "*types.TipSet",
+        "description": "*types.TipSet",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "Cids": null,
+              "Blocks": null,
+              "Height": 0
+            }
+          ],
+          "additionalProperties": false,
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1864"
+      }
+    },
+    {
+      "name": "Filecoin.ChainHotGC",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainHotGC(p0 context.Context, p1 HotGCOpts) error {\n\tif s.Internal.ChainHotGC == nil {\n\t\treturn ErrNotSupported\n\t}\n\treturn s.Internal.ChainHotGC(p0, p1)\n}\n```",
+      "summary": "ChainHotGC does online (badger) GC on the hot store; only supported if you are using\nthe splitstore\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "HotGCOpts",
+          "summary": "",
+          "schema": {
+            "examples": [
+              {
+                "Threshold": 12.3,
+                "Periodic": true,
+                "Moving": true
+              }
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "Moving": {
+                "type": "boolean"
+              },
+              "Periodic": {
+                "type": "boolean"
+              },
+              "Threshold": {
+                "type": "number"
+              }
+            },
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "Null",
+        "description": "Null",
+        "schema": {
+          "type": ["null"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1875"
+      }
+    },
+    {
+      "name": "Filecoin.ChainPrune",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainPrune(p0 context.Context, p1 PruneOpts) error {\n\tif s.Internal.ChainPrune == nil {\n\t\treturn ErrNotSupported\n\t}\n\treturn s.Internal.ChainPrune(p0, p1)\n}\n```",
+      "summary": "ChainPrune forces compaction on cold store and garbage collects; only supported if you\nare using the splitstore\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "PruneOpts",
+          "summary": "",
+          "schema": {
+            "examples": [
+              {
+                "MovingGC": true,
+                "RetainState": 9
+              }
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "MovingGC": {
+                "type": "boolean"
+              },
+              "RetainState": {
+                "title": "number",
+                "type": "number"
+              }
+            },
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "Null",
+        "description": "Null",
+        "schema": {
+          "type": ["null"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1897"
+      }
+    },
+    {
+      "name": "Filecoin.ChainPutObj",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainPutObj(p0 context.Context, p1 blocks.Block) error {\n\tif s.Internal.ChainPutObj == nil {\n\t\treturn ErrNotSupported\n\t}\n\treturn s.Internal.ChainPutObj(p0, p1)\n}\n```",
+      "summary": "ChainPutObj puts a given object into the block store\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "blocks.Block",
+          "summary": "",
+          "schema": {
+            "examples": [{}],
+            "additionalProperties": true
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "Null",
+        "description": "Null",
+        "schema": {
+          "type": ["null"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1908"
+      }
+    },
+    {
+      "name": "Filecoin.ChainReadObj",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainReadObj(p0 context.Context, p1 cid.Cid) ([]byte, error) {\n\tif s.Internal.ChainReadObj == nil {\n\t\treturn *new([]byte), ErrNotSupported\n\t}\n\treturn s.Internal.ChainReadObj(p0, p1)\n}\n```",
+      "summary": "ChainReadObj reads ipld nodes referenced by the specified CID from chain\nblockstore and returns raw bytes.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "[]byte",
+        "description": "[]byte",
+        "summary": "",
+        "schema": {
+          "examples": ["Ynl0ZSBhcnJheQ=="],
+          "type": ["string"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1919"
+      }
+    },
+    {
+      "name": "Filecoin.ChainSetHead",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainSetHead(p0 context.Context, p1 types.TipSetKey) error {\n\tif s.Internal.ChainSetHead == nil {\n\t\treturn ErrNotSupported\n\t}\n\treturn s.Internal.ChainSetHead(p0, p1)\n}\n```",
+      "summary": "ChainSetHead forcefully sets current chain head. Use with caution.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "Null",
+        "description": "Null",
+        "schema": {
+          "type": ["null"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1930"
+      }
+    },
+    {
+      "name": "Filecoin.ChainStatObj",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainStatObj(p0 context.Context, p1 cid.Cid, p2 cid.Cid) (ObjStat, error) {\n\tif s.Internal.ChainStatObj == nil {\n\t\treturn *new(ObjStat), ErrNotSupported\n\t}\n\treturn s.Internal.ChainStatObj(p0, p1, p2)\n}\n```",
+      "summary": "ChainStatObj returns statistics about the graph referenced by 'obj'.\nIf 'base' is also specified, then the returned stat will be a diff\nbetween the two objects.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        },
+        {
+          "name": "p2",
+          "description": "cid.Cid",
+          "summary": "",
+          "schema": {
+            "title": "Content Identifier",
+            "description": "Cid represents a self-describing content addressed identifier. It is formed by a Version, a Codec (which indicates a multicodec-packed content type) and a Multihash.",
+            "examples": [
+              {
+                "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+              }
+            ],
+            "type": ["string"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "ObjStat",
+        "description": "ObjStat",
+        "summary": "",
+        "schema": {
+          "examples": [
+            {
+              "Size": 42,
+              "Links": 42
+            }
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "Links": {
+              "title": "number",
+              "type": "number"
+            },
+            "Size": {
+              "title": "number",
+              "type": "number"
+            }
+          },
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1941"
+      }
+    },
+    {
+      "name": "Filecoin.ChainTipSetWeight",
+      "description": "```go\nfunc (s *FullNodeStruct) ChainTipSetWeight(p0 context.Context, p1 types.TipSetKey) (types.BigInt, error) {\n\tif s.Internal.ChainTipSetWeight == nil {\n\t\treturn *new(types.BigInt), ErrNotSupported\n\t}\n\treturn s.Internal.ChainTipSetWeight(p0, p1)\n}\n```",
+      "summary": "ChainTipSetWeight computes weight for the specified tipset.\n",
+      "paramStructure": "by-position",
+      "params": [
+        {
+          "name": "p1",
+          "description": "types.TipSetKey",
+          "summary": "",
+          "schema": {
+            "examples": [
+              [
+                {
+                  "/": "bafy2bzacea3wsdh6y3a36tb3skempjoxqpuyompjbmfeyf34fi3uy6uue42v4"
+                },
+                {
+                  "/": "bafy2bzacebp3shtrn43k7g3unredz7fxn4gj533d3o43tqn2p2ipxxhrvchve"
+                }
+              ]
+            ],
+            "additionalProperties": false,
+            "type": ["object"]
+          },
+          "required": true,
+          "deprecated": false
+        }
+      ],
+      "result": {
+        "name": "types.BigInt",
+        "description": "types.BigInt",
+        "summary": "",
+        "schema": {
+          "examples": ["0"],
+          "additionalProperties": false,
+          "type": ["object"]
+        },
+        "required": true,
+        "deprecated": false
+      },
+      "deprecated": false,
+      "externalDocs": {
+        "description": "Github remote link",
+        "url": "https://github.com/filecoin-project/lotus/blob/master/api/proxy_gen.go#L1952"
+      }
+    }
+  ]
+}
