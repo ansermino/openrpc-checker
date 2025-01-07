@@ -65,11 +65,12 @@ Currently the following checks are supported:
 
 Each check requires two components:
 - a check function
-- an issue
+- an issue type
 
-Check functions are implemented in `src/checks`. Ensure that new checks are added to the corresponding array at the bottom of the file. This will add them to the set of checks invoked on each run.
+Check functions are implemented in `src/checks`. Ensure that new checks are added to the array at the bottom of the corresponding file. This will add them to the set of checks invoked on each run.
 
-Issues are implemented in `src/issues`. The message passed to the `super()` constructor will be used to print the issue details if one is found. 
+Issues are implemented in `src/issues`. The message passed to the `super()` constructor will be used to print the 
+issue details to the user if one is found. 
 
 Once you have created a check function and a corresponding issue type, create a test in `src/diff.spec.ts`. 
 
