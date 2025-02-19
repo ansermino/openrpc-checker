@@ -4,7 +4,7 @@ import {OpenrpcDocument} from '@open-rpc/meta-schema';
 import {diff} from './diff';
 import {printDiff} from './output';
 
-export const diffCmd = async (spec: string, target: string, refParser: boolean) => {
+export const diffCmd = async (spec: string, target: string, refParser: boolean, summary: boolean) => {
   let specDoc: OpenrpcDocument;
   let targetDoc: OpenrpcDocument;
 
@@ -21,7 +21,7 @@ export const diffCmd = async (spec: string, target: string, refParser: boolean) 
 
 
   const res = diff(specDoc, targetDoc);
-  printDiff(res);
+  printDiff(res, summary);
 };
 
 export const checkCmd = async (target: string, refParser: boolean) => {

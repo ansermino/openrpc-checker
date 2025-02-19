@@ -9,9 +9,10 @@ program
   .option('-s, --spec <PATH>', 'Path to spec file')
   .option('-t, --target <PATH>', 'Path to target file')
   .option('--ref-parser', 'Use json-schema-ref-parser instead of schema-utils-js', false)
+  .option('--summary', 'Display only a list of methods with issues, hide the details')
   .action(async (options) => {
     try {
-      await diffCmd(options.spec, options.target, options.refParser);
+      await diffCmd(options.spec, options.target, options.refParser, options.summary);
     } catch (e) {
       program.error(e);
     }

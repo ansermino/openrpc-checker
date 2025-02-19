@@ -25,6 +25,7 @@ Options:
   -s, --spec <PATH>    Path to spec file
   -t, --target <PATH>  Path to target file
   --ref-parser         Use json-schema-ref-parser instead of schema-utils-js (default: false)
+  --summary            Display only a list of methods with issues, hide the details
   -h, --help           display help for command
 ```
 

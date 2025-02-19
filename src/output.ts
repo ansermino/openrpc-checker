@@ -12,7 +12,7 @@ const formatIssues = (issues: DiffIssue[]): string => {
   return res;
 };
 
-export const printDiff = (results: DiffResults) => {
+const printDetails = (results: DiffResults) => {
   const methods = Object.keys(results);
 
   console.log(`Validated ${methods.length} methods.`);
@@ -40,5 +40,35 @@ export const printDiff = (results: DiffResults) => {
     console.log(`❌ Found ${count} methods with issues`);
   } else {
     console.log(`✅ Found no issues!`);
+  }
+}
+
+const printSummary = (results: DiffResults) => {
+  const methods = Object.keys(results);
+
+  console.log(`Validated ${methods.length} methods.`);
+
+  let count = 0;
+
+  for (const m of methods) {
+
+    if (results[m].length != 0) {
+      console.log(`❌ Found ${results[m].length == 1 ? "1 issue" : results[m].length + " issues"} with method ${m}`);
+      count++
+    }
+  }
+
+  if (count > 0) {
+    console.log(`\n❌ Found ${count} methods with issues. Re-run without "--summary" to see details.`);
+  } else {
+    console.log(`✅ Found no issues!`);
+  }
+}
+
+export const printDiff = (results: DiffResults, summary: boolean) => {
+  if (summary) {
+    printSummary(results)
+  } else {
+    printDetails(results)
   }
 };
